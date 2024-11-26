@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bootstrap-5.3.3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap-5.3.3-dist/js/bootstrap.bundle.js">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&" />
+    <title>Document</title>
+    <style>
+        .sectOne{
+            width: 700px;
+            height: 60vh;        
+            transition: background-color 0.5s ease;
+        }
+        .pictures{
+            width: 200px;
+            aspect-ratio: 1 / 1;
+            border: 10px solid white;
+            border-radius: 20px;
+            box-shadow: 0 0 5px black;
+            left: 50px;
+            background-image: url();
+        }
+        .info{
+            width: 400px;
+            aspect-ratio: 1 / 0.6;
+            right: 40px;
+            top: 25%;
+        }
+        .arrow{
+            width: 100%;
+            margin: auto;
+            top: 50%;
+            left: 0;
+        }
+        .reply{
+            width: 90%;
+            height: 100%;
+            margin: auto;
+            overflow: hidden;
+        }
+        img{
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <section class=" sectOne m-auto rounded shadow my-4 p-3 d-flex align-items-center position-relative">
+        <div class="pictures position-absolute">
+        </div>
+        <div class="info position-absolute">
+            <div class="reply"></div>
+        </div>
+        <div class="arrow d-flex justify-content-between align-items-center position-absolute">
+            <button class="btn px-3 py-2">
+                <span class="material-symbols-outlined fw-bolder text-white" onclick="previous()">chevron_left</span>
+            </button>
+            <span class="preview"></span>
+            <button class="btn px-3 py-2">
+                <span class="material-symbols-outlined fw-bolder text-white" onclick="next()">chevron_right</span>
+            </button>
+        </div>
+    </section>
+</body>
+</html>
+
+<script>
+    let picture = document.querySelector('.pictures')
+    let information = document.querySelector('.reply')
+    let images = document.querySelector('img')
+    let section = document.querySelector('.sectOne')
+    let myImages = ['collegenational.jpg' , 'freelance6.webp' , 'globalfleet.webp' , 'location-1.webp' , 'location-3.webp']
+    let colors = ["red", "green", "greenyellow", "crimson", "navy", "orangered"]
+    let index = 0
+    const users = {
+    Alex: {
+        email: 'alex@alex.com',
+        skills: ['HTML', 'CSS', 'JavaScript'],
+        age: 20,
+        isLoggedIn: false,
+        points: 30
+    },
+    Asab: {
+        email: 'asab@asab.com',
+        skills: ['HTML', 'CSS', 'JavaScript', 'Redux', 'MongoDB', 'Express', 'React', 'Node'],
+        age: 25,
+        isLoggedIn: false,
+        points: 50
+    },
+    Brook: {
+        email: 'daniel@daniel.com',
+        skills: ['HTML', 'CSS', 'JavaScript', 'React', 'Redux'],
+        age: 30,
+        isLoggedIn: true,
+        points: 50
+    },
+    Daniel: {
+        email: 'daniel@alex.com',
+        skills: ['HTML', 'CSS', 'JavaScript', 'Python'],
+        age: 20,
+        isLoggedIn: false,
+        points: 40
+    },
+    John: {
+        email: 'john@john.com',
+        skills: ['HTML', 'CSS', 'JavaScript', 'React', 'Redux', 'Node.js'],
+        age: 20,
+        isLoggedIn: true,
+        points: 50
+    }
+    }
+
+    let updateBgCol = () => {
+        section.style.backgroundColor = colors[index]
+    }
+
+    let inpNames = Object.keys(users)
+    console.log(inpNames);
+    let insideObj = Object.values(users)
+    console.log(insideObj);
+    console.log(insideObj[0].email);
+    
+    
+    
+
+    let changeDetails = () => {
+            information.innerHTML = `                
+            <h4 class="text-white">Name : ${inpNames[index]}</h4>
+            <h4 class="text-white mt-3">Email : ${insideObj[index].email}</h4>
+            <h4 class="text-white mt-3">Skills : ${insideObj[index].skills.join(", ")}</h4>
+            <h4 class="text-white mt-3">Age : ${insideObj[index].age}</h4>
+            <h4 class="text-white mt-3">Points : ${insideObj[index].points}</h4>
+            <h4 class="text-white mt-3">Logged In? : ${insideObj[index].isLoggedIn}</h4>
+            `
+    }
+    let changePicture = () => {
+        picture.url = myImages[index]
+    }
+    
+    let next = () => {
+        if (index === myImages.length - 1) {
+            index = 0
+        } else {
+            index++
+        }
+        changePicture()
+        changeDetails()
+        updateBgCol()
+    }
+    let previous = () => {
+        if (index === 0) {
+            index = myImages.length - 1
+        } else {
+            index--
+        }
+        changePicture()
+        changeDetails()
+        updateBgCol()
+    }
+
+
+    document.addEventListener("DOMContentLoaded", changePicture);
+    document.addEventListener("DOMContentLoaded", changeDetails);
+    document.addEventListener("DOMContentLoaded", updateBgCol);
+</script>
